@@ -40,16 +40,18 @@
                             <span class="text-muted text-italic" style="font-size: 0.85rem;">Không có ảnh</span>
                         }
                     </td>
+
                     <td class="text-center">
                         @if (product.Category != null)
                         {
-                            <span class="badge bg-secondary">@product.Category.Name</span>
+                            <span class="badge bg-secondary px-3 py-2">@product.Category.Name</span>
                         }
                         else
                         {
                             <span class="text-muted small">Chưa phân loại</span>
                         }
                     </td>
+
                     <td class="text-end text-danger fw-bold">
                         @product.Price.ToString("#,##0") VNĐ
                     </td>

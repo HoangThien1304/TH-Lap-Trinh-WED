@@ -2,10 +2,14 @@
 
 @{
     ViewData["Title"] = "Trang chủ - Cửa hàng";
+    // Lấy danh sách danh mục từ ViewBag đã gửi qua từ Controller
+    var categories = ViewBag.Categories as List<BaiTapThucHanh.Models.Category>;
+    var currentCategoryId = ViewBag.CurrentCategoryId as int?;
 }
 
-<div class="container">
-    <h3 class="pb-2 border-bottom mb-4">Sản phẩm nổi bật</h3>
+
+
+    <h3 class="pb-2 border-bottom mb-4 text-dark fw-bold">Sản phẩm nổi bật</h3>
 
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
         @if (Model != null && Model.Any())
@@ -18,7 +22,7 @@
                         <div class="text-center bg-light rounded-top p-3" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                             {
-                                <img src="@Url.Content($"~/images/{product.ImageUrl}")" class="card-img-top" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="@product.Name" />
+                                <img src="/images/@product.ImageUrl" class="card-img-top" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="@product.Name" />
                             }
                             else
                             {
@@ -31,6 +35,13 @@
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-dark fw-bold mb-2">@product.Name</h5>
+
+                            @if (product.Category != null)
+                            {
+                                <div class="mb-2">
+                                    <span class="badge bg-light text-secondary border">@product.Category.Name</span>
+                                </div>
+                            }
 
                             <p class="card-text text-muted text-truncate small mb-3" title="@product.Description">
                                 @product.Description
@@ -55,7 +66,7 @@
         else
         {
             <div class="col-12 w-100 text-center text-muted py-5">
-                <p class="fs-5">Hiện tại hệ thống cửa hàng chưa có sản phẩm nào đăng bán.</p>
+                <p class="fs-5 m-0">Không tìm thấy sản phẩm nào thuộc danh mục này.</p>
             </div>
         }
     </div>

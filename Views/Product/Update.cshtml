@@ -1,22 +1,65 @@
 ﻿@model BaiTapThucHanh.Models.Product
 
 <h2>Edit Product</h2>
-<form asp-action="Update">
+
+<form asp-action="Update" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label asp-for="Name"></label>
+
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="form-label fw-bold">Tên sản phẩm</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Price"></label>
+
+    <div class="form-group mb-3">
+        <label asp-for="CategoryId" class="form-label fw-bold">Danh mục sản phẩm</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+            <option value="">-- Chọn danh mục sản phẩm --</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="form-label fw-bold">Giá bán</label>
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
+
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="form-label fw-bold">Mô tả sản phẩm</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Update</button>
+
+    <div class="form-group mb-4">
+        <label asp-for="ImageFile" class="form-label fw-bold">Hình ảnh sản phẩm</label>
+
+        <div class="mb-3">
+            <p class="text-muted small mb-1">Hình ảnh hiện tại:</p>
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="/images/@Model.ImageUrl" width="150" height="150" class="img-thumbnail" style="object-fit: cover;" alt="@Model.Name" />
+            }
+            else
+            {
+                <span class="text-muted text-italic small">Sản phẩm này chưa có hình ảnh.</span>
+            }
+        </div>
+
+        <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+        <small class="text-muted d-block mt-1">Để trống nếu bạn muốn giữ nguyên hình ảnh cũ.</small>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+    </div>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

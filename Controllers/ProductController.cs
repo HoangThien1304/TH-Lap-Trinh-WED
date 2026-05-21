@@ -26,10 +26,11 @@ namespace BaiTapThucHanh.Controllers
         // ==========================================
         // ĐỌC DANH SÁCH SẢN PHẨM (INDEX)
         // ==========================================
+
         public IActionResult Index()
         {
-            // Lấy toàn bộ danh sách sản phẩm từ cơ sở dữ liệu SQL Server
-            var products = _context.Products.ToList();
+            // THÊM .Include(p => p.Category) để nạp kèm dữ liệu danh mục từ SQL Server
+            var products = _context.Products.Include(p => p.Category).ToList();
             return View(products);
         }
 
@@ -99,6 +100,9 @@ namespace BaiTapThucHanh.Controllers
         // ==========================================
         // 2. CẬP NHẬT / SỬA SẢN PHẨM (UPDATE)
         // ==========================================
+        // ==========================================
+        // 2. CẬP NHẬT / SỬA SẢN PHẨM (Giao diện hiển thị - GET)
+        // ==========================================
         public ActionResult Update(int id)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == id);
@@ -107,18 +111,22 @@ namespace BaiTapThucHanh.Controllers
                 return NotFound();
             }
 
+            // Lấy danh sách danh mục từ bảng Categories để hiển thị lên Dropdown và chọn sẵn danh mục hiện tại của sản phẩm
             var categories = _context.Categories.ToList();
             ViewBag.Categories = new SelectList(categories, "Id", "Name", product.CategoryId);
 
             return View(product);
         }
 
+        // ==========================================
+        // XỬ LÝ LƯU CẬP NHẬT SẢN PHẨM (POST)
+        // ==========================================
         [HttpPost]
         public IActionResult Update(Product product)
         {
             if (ModelState.IsValid)
             {
-                // Tìm sản phẩm gốc hiện tại trong Database để lấy lại thông tin ảnh cũ (AsNoTracking giúp tránh xung đột thực thể)
+                // Tìm sản phẩm gốc hiện tại trong Database để lấy lại thông tin ảnh cũ
                 var existingProduct = _context.Products.AsNoTracking().FirstOrDefault(p => p.Id == product.Id);
                 if (existingProduct == null)
                 {
@@ -139,7 +147,7 @@ namespace BaiTapThucHanh.Controllers
                         }
                     }
 
-                    // Lưu ảnh mới
+                    // Lưu ảnh mới tải lên
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + product.ImageFile.FileName;
                     string newFilePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -152,22 +160,23 @@ namespace BaiTapThucHanh.Controllers
                 }
                 else
                 {
-                    // Nếu không tải ảnh mới, giữ nguyên tên ảnh cũ
+                    // Nếu không tải ảnh mới, giữ nguyên tên ảnh cũ đã lưu từ trước
                     product.ImageUrl = existingProduct.ImageUrl;
                 }
 
-                // Cập nhật thông tin mới vào Db và lưu lại
+                // Cập nhật thông tin mới (Tên, Giá, Mô tả, đặc biệt là Mã danh mục CategoryId mới) vào DB
                 _context.Products.Update(product);
                 _context.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            var categories = _context.Categories.ToList();
-            ViewBag.Categories = new SelectList(categories, "Id", "Name", product.CategoryId);
+            // LƯU Ý BẮT BUỘC: Nếu dữ liệu nhập vào Form bị lỗi (ví dụ sai định dạng giá tiền),
+            // chúng ta phải nạp lại danh sách danh mục vào ViewBag trước khi trả lại trang View để tránh lỗi Crash ứng dụng.
+            var categoriesList = _context.Categories.ToList();
+            ViewBag.Categories = new SelectList(categoriesList, "Id", "Name", product.CategoryId);
             return View(product);
         }
-
         // ==========================================
         // 3. XÓA SẢN PHẨM (DELETE)
         // ==========================================
