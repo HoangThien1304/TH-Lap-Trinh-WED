@@ -1,0 +1,23 @@
+﻿@model BaiTapThucHanh.Models.Category
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+}
+
+<h3 class="text-danger">Bạn có chắc chắn muốn xóa danh mục này không?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Mã danh mục:</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+
+        <dt class="col-sm-2">Tên danh mục:</dt>
+        <dd class="col-sm-10 fw-bold">@Model.Name</dd>
+    </dl>
+
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+    </form>
+</div>

@@ -1,0 +1,10 @@
+﻿@model BaiTapThucHanh.Models.Product
+
+<h2>Product Details</h2>
+<div>
+    <h4>Name: @Model.Name</h4>
+    <img src="/images/@Model.ImageUrl" alt="@Model.Name" />
+    <h4>Price: @Model.Price</h4>
+    <h4>Description: @Model.Description</h4>
+</div>
+<a asp-action="Index">Back to List</a>

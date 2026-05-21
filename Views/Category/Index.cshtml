@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BaiTapThucHanh.Models.Category>
+
+@{
+    ViewData["Title"] = "Danh sách danh mục";
+}
+
+<h2 class="mb-4">Danh sách danh mục sản phẩm</h2>
+
+<p>
+    <a asp-action="Add" class="btn btn-success">Thêm danh mục mới</a>
+</p>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light text-center">
+        <tr>
+            <th style="width: 20%;">Mã danh mục (ID)</th>
+            <th style="width: 60%;">Tên danh mục</th>
+            <th style="width: 20%;">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">@item.Id</td>
+                    <td class="fw-bold">@item.Name</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm text-white me-1">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center text-muted p-4">Chưa có danh mục nào.</td>
+            </tr>
+        }
+    </tbody>
+</table>

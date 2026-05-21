@@ -1,0 +1,23 @@
+﻿@model BaiTapThucHanh.Models.Category
+
+@{
+    ViewData["Title"] = "Sửa danh mục";
+}
+
+<h1>Cập nhật danh mục</h1>
+
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Tên danh mục</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-warning text-white">Cập nhật</button>
+        <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+    </div>
+</form>
