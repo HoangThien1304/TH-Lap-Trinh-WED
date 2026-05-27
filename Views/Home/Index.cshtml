@@ -7,9 +7,92 @@
     var currentCategoryId = ViewBag.CurrentCategoryId as int?;
 }
 
+<style>
+    /* STYLE ĐỘC QUYỀN PHONG CÁCH WORLD CUP BRAZIL CHO TRANG CHỦ */
 
+    /* Cấu hình các nút lọc Danh mục */
+    .btn-br-filter {
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid #009b3a;
+        color: #009b3a;
+    }
 
-    <h3 class="pb-2 border-bottom mb-4 text-dark fw-bold">Sản phẩm nổi bật</h3>
+        .btn-br-filter:hover {
+            background-color: #fedf00 !important;
+            border-color: #fedf00 !important;
+            color: #002776 !important;
+            transform: scale(1.05);
+        }
+        /* Nút danh mục đang được active chọn */
+        .btn-br-filter.active-br {
+            background-color: #009b3a !important;
+            border-color: #009b3a !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 10px rgba(0, 155, 58, 0.3);
+        }
+
+    /* Hiệu ứng mượt mà cho Card sản phẩm */
+    .br-product-card {
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+
+        .br-product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 39, 118, 0.12) !important;
+            border-color: rgba(0, 155, 58, 0.2) !important;
+        }
+
+    /* Tiêu đề phần thi đấu/nổi bật */
+    .br-title-border {
+        border-left: 5px solid #fedf00;
+        padding-left: 12px;
+    }
+
+    /* Nút bấm xem chi tiết rực lửa Samba */
+    .btn-samba {
+        background: linear-gradient(135deg, #002776 0%, #001e5c 100%);
+        color: #ffffff;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .br-product-card:hover .btn-samba {
+        background: linear-gradient(135deg, #009b3a 0%, #fedf00 100%);
+        color: #002776;
+    }
+</style>
+
+<div class="container py-3">
+
+    <div class="mb-5 p-3 bg-light rounded-3 border-start border-success border-3 shadow-sm">
+        <h5 class="fw-bold mb-3 text-dark">
+            <i class="bi bi-funnel-fill text-success me-1"></i> Chọn danh mục sản phẩm:
+        </h5>
+        <div class="d-flex flex-wrap gap-2">
+            <a asp-action="Index" asp-route-categoryId=""
+               class="btn btn-br-filter rounded-pill px-4 @(currentCategoryId == null || currentCategoryId == 0 ? "active-br" : "")">
+                <i class="bi bi-collection-fill me-1"></i> Tất cả sản phẩm
+            </a>
+
+            @if (categories != null && categories.Any())
+            {
+                foreach (var cat in categories)
+                {
+                    <a asp-action="Index" asp-route-categoryId="@cat.Id"
+                       class="btn btn-br-filter rounded-pill px-4 @(currentCategoryId == cat.Id ? "active-br" : "")">
+                        <i class="bi bi-tag-fill small me-1"></i> @cat.Name
+                    </a>
+                }
+            }
+        </div>
+    </div>
+
+    <h3 class="pb-2 mb-4 text-dark fw-bold br-title-border">
+        <i class="bi bi-star-fill text-warning me-1"></i> Sản phẩm nổi bật
+    </h3>
 
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
         @if (Model != null && Model.Any())
@@ -17,9 +100,9 @@
             @foreach (var product in Model)
             {
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-0 position-relative">
+                    <div class="card h-100 shadow-sm rounded-3 overflow-hidden br-product-card">
 
-                        <div class="text-center bg-light rounded-top p-3" style="height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <div class="text-center bg-light p-3 position-relative" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                             {
                                 <img src="/images/@product.ImageUrl" class="card-img-top" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="@product.Name" />
@@ -27,36 +110,42 @@
                             else
                             {
                                 <div class="text-muted text-center">
-                                    <i class="bi bi-image" style="font-size: 3rem;"></i><br />
+                                    <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i><br />
                                     <span style="font-size: 0.85rem;">Không có ảnh</span>
                                 </div>
                             }
                         </div>
 
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-dark fw-bold mb-2">@product.Name</h5>
+                        <div class="card-body d-flex flex-column pt-3">
+                            <h5 class="card-title text-dark fw-bold mb-1" style="font-size: 1.1rem;">@product.Name</h5>
 
-                            @if (product.Category != null)
-                            {
-                                <div class="mb-2">
-                                    <span class="badge bg-light text-secondary border">@product.Category.Name</span>
-                                </div>
-                            }
+                            <div class="mb-2">
+                                @if (product.Category != null)
+                                {
+                                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded">
+                                        <i class="bi bi-tag-fill me-1"></i>@product.Category.Name
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-light text-muted border px-2 py-1 rounded">Chưa phân loại</span>
+                                }
+                            </div>
 
                             <p class="card-text text-muted text-truncate small mb-3" title="@product.Description">
                                 @product.Description
                             </p>
 
-                            <div class="mt-auto">
+                            <div class="mt-auto pt-2 border-top border-light">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-danger fw-bold fs-5">@product.Price.ToString("#,##0") VNĐ</span>
+                                    <span class="text-danger fw-bold fs-5">@product.Price.ToString("#,##0") <small style="font-size: 0.75rem;">VNĐ</small></span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="card-footer p-0 border-top-0">
-                            <a asp-controller="Product" asp-action="Display" asp-route-id="@product.Id" class="btn btn-primary w-100 rounded-bottom">
-                                Xem chi tiết
+                            <a asp-controller="Product" asp-action="Display" asp-route-id="@product.Id" class="btn btn-samba w-100 py-2 rounded-0 rounded-bottom text-center">
+                                <i class="bi bi-search me-1"></i> Xem chi tiết
                             </a>
                         </div>
                     </div>
@@ -66,7 +155,10 @@
         else
         {
             <div class="col-12 w-100 text-center text-muted py-5">
-                <p class="fs-5 m-0">Không tìm thấy sản phẩm nào thuộc danh mục này.</p>
+                <div class="p-4 rounded-3 border border-dashed bg-light">
+                    <i class="bi bi-exclamation-circle text-warning mb-2" style="font-size: 2.5rem;"></i>
+                    <p class="fs-5 m-0 fw-semibold">Không tìm thấy sản phẩm nào thuộc nhóm danh mục này.</p>
+                </div>
             </div>
         }
     </div>

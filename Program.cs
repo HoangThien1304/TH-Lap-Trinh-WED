@@ -1,8 +1,9 @@
 using BaiTapThucHanh.Data;
 using BaiTapThucHanh.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders; // Thư viện bắt buộc để dùng PhysicalFileProvider
+using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Identity; // THÊM THƯ VIỆN NÀY ĐỂ SỬ DỤNG IDENTITYUSER
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Cấu hình kết nối SQL Server thông qua AppDbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// -------------------------------------------------------------------------
+// THÊM ĐOẠN NÀY: CẤU HÌNH DỊCH VỤ CỦA ASP.NET CORE IDENTITY
+// -------------------------------------------------------------------------
+builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+    options.SignIn.RequireConfirmedAccount = false; // Tắt bắt buộc xác nhận Email để làm bài tập dễ dàng hơn
+    options.Password.RequireDigit = false;          // Không bắt buộc mật khẩu phải có chữ số
+    options.Password.RequiredLength = 6;            // Độ dài mật khẩu tối thiểu là 6 ký tự
+    options.Password.RequireNonAlphanumeric = false; // Không bắt buộc có ký tự đặc biệt (@, #, $...)
+    options.Password.RequireUppercase = false;       // Không bắt buộc phải có chữ viết hoa
+    options.Password.RequireLowercase = false;       // Không bắt buộc phải có chữ viết thường
+})
+.AddRoles<IdentityRole>() // BẮT BUỘC THÊM: Để hệ thống kích hoạt tính năng quản lý phân vai trò (Roles) cho Bài 4
+.AddEntityFrameworkStores<AppDbContext>();
+
+// Bắt buộc phải có dịch vụ này thì ứng dụng mới đọc được giao diện Đăng ký/Đăng nhập (Razor Pages) của Identity UI
+builder.Services.AddRazorPages();
+// -------------------------------------------------------------------------
 
 // Thêm các dịch vụ hỗ trợ mô hình MVC (Controller & Views)
 builder.Services.AddControllersWithViews();
@@ -33,24 +52,47 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // --- CẤU HÌNH PHỤC VỤ FILE TĨNH ---
-// 1. Dòng mặc định để hệ thống tự động đọc file tĩnh trong thư mục wwwroot
 app.UseStaticFiles();
 
-// 2. CẤU HÌNH THÊM: Cho phép ứng dụng đọc và hiển thị hình ảnh từ thư mục "images" ở gốc dự án
+// Cho phép ứng dụng đọc và hiển thị hình ảnh từ thư mục "images" ở gốc dự án
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(app.Environment.ContentRootPath, "images")), // Thay builder thành app cho đúng ngữ cảnh sau Build
+        Path.Combine(app.Environment.ContentRootPath, "images")),
     RequestPath = "/images"
 });
 // ----------------------------------
 
 app.UseRouting();
+
+// BẮT BUỘC: Phải kích hoạt Authentication (Xác thực danh tính) TRƯỚC Authorization (Cấp quyền)
+app.UseAuthentication();
 app.UseAuthorization();
+
+// THÊM DÒNG NÀY: Định tuyến để hệ thống tự động ánh xạ các trang Đăng ký/Đăng nhập của Identity UI
+app.MapRazorPages();
 
 // Cấu hình đường tuyến (Route) mặc định điều hướng vào trang chủ HomeController
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// =========================================================================
+// THÊM ĐOẠN NÀY: TỰ ĐỘNG CHẠY SEEDER ĐỂ KHỞI TẠO TÀI KHOẢN ADMIN KHI KHỞI ĐỘNG
+// =========================================================================
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        // Chạy hàm tạo Role Admin và User Admin mẫu bất đồng bộ
+        await DbSeeder.SeedRolesAndAdminAsync(services);
+    }
+    catch (Exception ex)
+    {
+        // Ghi nhận lỗi nếu hệ thống không kết nối tới SQL Server thành công lúc khởi động
+    }
+}
+// =========================================================================
 
 app.Run();

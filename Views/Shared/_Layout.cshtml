@@ -3,54 +3,280 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BaiTapThucHanh</title>
+    <title>@ViewData["Title"] - World Cup 2026 Edition</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BaiTapThucHanh.styles.css" asp-append-version="true" />
+
+    <style>
+        /* === ĐỊNH NGHĨA PHONG CÁCH WORLD CUP 2026 BRAZIL === */
+        body {
+        background-color: #f7f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* KHU VỰC LOGO TO TRÊN CÙNG - Nền gradient xanh lá Brazil */
+        .br-top-header {
+        background: linear-gradient(135deg, #009b3a 0%, #007b2e 100%);
+        padding: 2rem 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        position: relative;
+        }
+
+        /* LOGO SIÊU TO VÀ CĂN GIỮA */
+        .br-brand-giant {
+        color: #fedf00 !important;
+        font-weight: 900;
+        letter-spacing: 2px;
+        font-size: 3rem;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        text-decoration: none;
+        animation: sambaBlink 1.5s infinite ease-in-out;
+        display: inline-block;
+        }
+
+        .br-brand-giant:hover {
+        color: #ffffff !important;
+        animation-play-state: paused;
+        }
+
+        /* NÚT BẤM LOA PHÁT NHẠC SAMBA */
+        .audio-toggle-btn {
+        background: #fedf00;
+        color: #002776;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 1.3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        margin-left: 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .audio-toggle-btn:hover {
+        transform: scale(1.1);
+        background-color: #ffffff;
+        }
+
+        /* Hiệu ứng sóng nhạc lan tỏa khi đang phát */
+        .audio-playing {
+        animation: pulse 1s infinite alternate;
+        }
+
+        @@code { /* Ngăn Razor biên dịch nhầm CSS */
+        }
+
+        @@keyframes pulse {
+        0% {
+        box-shadow: 0 0 0 0 rgba(254, 223, 0, 0.7);
+        }
+
+        100% {
+        box-shadow: 0 0 0 10px rgba(254, 223, 0, 0);
+        }
+        }
+
+        /* HIỆU ỨNG NHẤP NHÁY SAMBA */
+        @@keyframes sambaBlink {
+        0% {
+        color: #fedf00;
+        transform: scale(1);
+        text-shadow: 0 0 15px rgba(254, 223, 0, 0.6);
+        }
+
+        50% {
+        color: #ffffff;
+        transform: scale(1.03);
+        text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 35px #fedf00;
+        }
+
+        100% {
+        color: #fedf00;
+        transform: scale(1);
+        text-shadow: 0 0 15px rgba(254, 223, 0, 0.6);
+        }
+        }
+
+        /* THANH MENU NẰM PHÍA DƯỚI */
+        .br-navbar-bottom {
+        background-color: #002776 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+        padding: 0.5rem 1rem;
+        }
+
+        /* Định hình các nút Menu liên kết */
+        .br-nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 600;
+        padding: 0.6rem 1.2rem !important;
+        margin: 0 0.2rem;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        }
+
+        .br-nav-link:hover {
+        background-color: #fedf00 !important;
+        color: #002776 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .br-nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2) !important;
+        color: #fedf00 !important;
+        border: 1px solid rgba(254, 223, 0, 0.4);
+        }
+
+        .br-toggler {
+        border-color: rgba(254, 223, 0, 0.5) !important;
+        padding: 0.4rem;
+        }
+
+        .br-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28254, 223, 0, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        /* Định hình lại chữ và nút bấm Identity ở một góc riêng biệt */
+        .br-navbar-bottom .nav-link:not(.br-nav-link) {
+        color: #fedf00 !important;
+        font-weight: 600;
+        }
+
+        .br-navbar-bottom .nav-link:not(.br-nav-link):hover {
+        color: #ffffff !important;
+        }
+
+        .br-navbar-bottom .btn-link {
+        color: #ffffff !important;
+        text-decoration: none;
+        font-weight: 600;
+        }
+
+        .br-navbar-bottom .btn-link:hover {
+        color: #ffc107 !important;
+        }
+
+        .br-footer {
+        background-color: #002776;
+        color: rgba(255,255,255,0.7) !important;
+        padding: 1.5rem 0;
+        margin-top: 5rem;
+        border-top: 4px solid #fedf00 !important;
+        }
+
+        .br-footer a {
+        color: #fedf00;
+        text-decoration: none;
+        font-weight: bold;
+        }
+
+        .br-footer a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BaiTapThucHanh</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+    <header class="mb-4">
+        <div class="br-top-header text-center">
+            <div class="container d-flex align-items-center justify-content-center flex-wrap">
+                <a class="br-brand-giant" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-trophy-fill me-2 text-warning"></i>HUY88 SHOP
+                </a>
 
+                <button id="musicBtn" class="audio-toggle-btn" title="Bật/Tắt nhạc World Cup">
+                    <i id="speakerIcon" class="bi bi-volume-mute-fill"></i>
+                </button>
+
+                <audio id="wcAudio" loop>
+                    <source src="/audio/Brazil tema Neymar Samba dance [BBxJ8yXMbDI].mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark br-navbar-bottom">
+            <div class="container">
+                <button class="navbar-toggler br-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon br-toggler-icon"></span>
+                    <span class="text-warning small ms-1">MENU</span>
+                </button>
+
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between text-center">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Danh sách sản phẩm</a>
+                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door-fill me-1"></i> Trang Chủ
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Add">Thêm sản phẩm mới</a>
+                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                                <i class="bi bi-grid-3x3-gap-fill me-1"></i> Danh Sách Sản Phẩm
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Quản lý danh mục</a>
+                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Product" asp-action="Add">
+                                <i class="bi bi-plus-circle-fill me-1"></i> Thêm Sản Phẩm Mới
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Category" asp-action="Index">
+                                <i class="bi bi-tags-fill me-1"></i> Quản Lý Danh Mục
+                            </a>
                         </li>
                     </ul>
+
+                    <div class="d-flex align-items-center justify-content-center mt-2 mt-lg-0">
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div class="container shadow-sm bg-white rounded-3 p-4 min-vh-100">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="br-footer text-center">
         <div class="container">
-            &copy; 2026 - BaiTapThucHanh - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <p class="mb-1">&copy; 2026 - <strong>BaiTapThucHanh</strong> - Bản Quyền Thuộc Về HUY88 SHOP</p>
+            <small>Đường dẫn bảo mật: <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách Bảo mật (Privacy)</a></small>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)</body>
+
+    <script>
+        const audio = document.getElementById('wcAudio');
+        const btn = document.getElementById('musicBtn');
+        const icon = document.getElementById('speakerIcon');
+
+        btn.addEventListener('click', function() {
+        if (audio.paused) {
+        audio.play();
+        icon.className = 'bi bi-volume-up-fill';
+        btn.classList.add('audio-playing');
+        } else {
+        audio.pause();
+        icon.className = 'bi bi-volume-mute-fill';
+        btn.classList.remove('audio-playing');
+        }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

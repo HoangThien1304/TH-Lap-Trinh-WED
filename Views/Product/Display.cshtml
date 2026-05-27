@@ -1,10 +1,141 @@
 ﻿@model BaiTapThucHanh.Models.Product
 
-<h2>Product Details</h2>
-<div>
-    <h4>Name: @Model.Name</h4>
-    <img src="/images/@Model.ImageUrl" alt="@Model.Name" />
-    <h4>Price: @Model.Price</h4>
-    <h4>Description: @Model.Description</h4>
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm - BR26";
+}
+
+<style>
+    /* STYLE CHI TIẾT SẢN PHẨM PHONG CÁCH WORLD CUP BRAZIL */
+    .br-detail-box {
+        border-top: 4px solid #009b3a; /* Đường viền xanh lá trên đỉnh */
+        transition: all 0.3s ease;
+    }
+
+    .br-badge-cat {
+        background-color: #fedf00 !important;
+        color: #002776 !important;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .price-tag {
+        font-size: 1.8rem;
+        color: #dc3545;
+        font-weight: 800;
+        text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
+    }
+
+    .btn-br-back {
+        border: 2px solid #002776;
+        color: #002776;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-br-back:hover {
+            background-color: #002776;
+            color: #ffffff;
+            transform: translateX(-3px);
+        }
+
+    .btn-br-edit {
+        background: linear-gradient(135deg, #009b3a 0%, #007b2e 100%);
+        color: white;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-br-edit:hover {
+            background: linear-gradient(135deg, #fedf00 0%, #e5c700 100%);
+            color: #002776;
+            box-shadow: 0 4px 12px rgba(254, 223, 0, 0.3);
+        }
+
+    .img-container {
+        border: 1px solid rgba(0,0,0,0.05);
+        background-color: #f8f9fa;
+        min-height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+</style>
+
+<div class="container py-4">
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        <h2 class="text-dark fw-bold m-0">
+            <i class="bi bi-trophy-fill text-warning me-2"></i>Chi Tiết Sản Phẩm
+        </h2>
+        <a asp-action="Index" class="btn btn-br-back rounded-pill px-4">
+            <i class="bi bi-arrow-left me-1"></i> Quay lại danh sách
+        </a>
+    </div>
+
+    <div class="card shadow-sm rounded-3 br-detail-box overflow-hidden bg-white">
+        <div class="row g-0">
+
+            <div class="col-md-5">
+                <div class="img-container p-4 h-100">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="/images/@Model.ImageUrl" class="img-fluid rounded shadow-sm" style="max-height: 350px; object-fit: contain;" alt="@Model.Name" />
+                    }
+                    else
+                    {
+                        <div class="text-center text-muted py-5">
+                            <i class="bi bi-image" style="font-size: 5rem; color: #dee2e6;"></i>
+                            <p class="mt-2 mb-0 small">Sản phẩm chưa cập nhật hình ảnh</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-7 d-flex flex-column justify-content-between">
+                <div class="card-body p-4 p-lg-5">
+
+                    <div class="mb-3">
+                        @if (Model.Category != null)
+                        {
+                            <span class="badge br-badge-cat px-3 py-2 rounded shadow-sm">
+                                <i class="bi bi-tag-fill me-1"></i> @Model.Category.Name
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-light text-muted border px-3 py-2 rounded">Chưa phân loại</span>
+                        }
+                    </div>
+
+                    <h1 class="display-6 text-dark fw-bold mb-3">@Model.Name</h1>
+
+                    <div class="bg-light p-3 rounded-3 mb-4 border-start border-danger border-4">
+                        <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Giá bán niêm yết</small>
+                        <span class="price-tag">@Model.Price.ToString("#,##0") <span style="font-size: 1.2rem;">VNĐ</span></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-secondary mb-2">
+                            <i class="bi bi-file-earmark-text-fill me-1 text-success"></i> Đặc điểm nổi bật:
+                        </h5>
+                        <p class="text-muted lh-base p-3 bg-light rounded-3" style="white-space: pre-line; font-size: 1.05rem;">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                @Model.Description
+                            }
+                            else
+                            {
+                                <span class="text-italic small text-muted">Không có mô tả chi tiết cho sản phẩm này.</span>
+                            }
+                        </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 </div>
-<a asp-action="Index">Back to List</a>
