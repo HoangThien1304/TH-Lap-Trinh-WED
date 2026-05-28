@@ -131,10 +131,7 @@ namespace BaiTapThucHanh.Controllers
             return View(product);
         }
 
-        // ==========================================
-        // 2. CẬP NHẬT SẢN PHẨM & SAO CHÉP THÊM ẢNH PHỤ (UPDATE)
-        // CHỈ CHO PHÉP TÀI KHOẢN CÓ QUYỀN ADMIN TRUY CẬP
-        // ==========================================
+        
         [Authorize(Roles = "Admin")]
         public ActionResult Update(int id)
         {
