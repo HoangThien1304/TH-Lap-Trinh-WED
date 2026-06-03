@@ -1,0 +1,156 @@
+@{
+    ViewData["Title"] = "Liên hệ chúng tôi";
+}
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Header -->
+            <div class="mb-5 border-bottom pb-4" style="border-color: #ff6b35 !important;">
+                <h1 class="h2" style="color: #1a1a1a; font-weight: 900; display: flex; align-items: center;">
+                    <i class="bi bi-telephone-fill me-3" style="color: #ff6b35; font-size: 2rem;"></i>
+                    Liên Hệ Với Chúng Tôi
+                </h1>
+                <p class="text-muted mt-3">
+                    Nếu bạn có bất kỳ câu hỏi nào về sản phẩm hoặc dịch vụ của chúng tôi, vui lòng liên hệ qua các thông tin dưới đây.
+                </p>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="row g-4 mb-5">
+                <!-- Email -->
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #fff5f0 0%, #ffe6d5 100%); border-left: 5px solid #ff6b35;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <i class="bi bi-envelope-fill me-3" style="color: #ff6b35; font-size: 1.5rem;"></i>
+                            <h5 class="m-0" style="color: #1a1a1a; font-weight: 700;">Email</h5>
+                        </div>
+                        <p class="m-0" style="color: #333; font-size: 1rem;">
+                            <a href="mailto:thientuong316@gmail.com" style="color: #ff6b35; text-decoration: none; font-weight: 600;">
+                                thientuong316@gmail.com
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #f0f5ff 0%, #d5e6ff 100%); border-left: 5px solid #ff6b35;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <i class="bi bi-telephone-fill me-3" style="color: #ff6b35; font-size: 1.5rem;"></i>
+                            <h5 class="m-0" style="color: #1a1a1a; font-weight: 700;">Điện Thoại</h5>
+                        </div>
+                        <p class="m-0" style="color: #333; font-size: 1rem;">
+                            <a href="tel:+84123456789" style="color: #ff6b35; text-decoration: none; font-weight: 600;">
+                                +84 (123) 456-789
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #f5f0ff 0%, #e6d5ff 100%); border-left: 5px solid #ff6b35;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <i class="bi bi-geo-alt-fill me-3" style="color: #ff6b35; font-size: 1.5rem;"></i>
+                            <h5 class="m-0" style="color: #1a1a1a; font-weight: 700;">Địa Chỉ</h5>
+                        </div>
+                        <p class="m-0" style="color: #333; font-size: 1rem;">
+                            123 Đường Sneaker, Quận 1,<br/>
+                            TP. Hồ Chí Minh, Việt Nam
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #f5fff0 0%, #d5ffe6 100%); border-left: 5px solid #ff6b35;">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <i class="bi bi-clock-fill me-3" style="color: #ff6b35; font-size: 1.5rem;"></i>
+                            <h5 class="m-0" style="color: #1a1a1a; font-weight: 700;">Giờ Mở Cửa</h5>
+                        </div>
+                        <p class="m-0" style="color: #333; font-size: 1rem;">
+                            Thứ 2 - Thứ 7: 9:00 - 21:00<br/>
+                            Chủ Nhật: 10:00 - 20:00
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="card border-0 shadow-sm" style="border-top: 5px solid #ff6b35 !important;">
+                <div class="card-header" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border: none;">
+                    <h5 class="m-0" style="color: #ff6b35; font-weight: 700; display: flex; align-items: center;">
+                        <i class="bi bi-chat-left-fill me-2"></i>
+                        Gửi Tin Nhắn Cho Chúng Tôi
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #1a1a1a; font-weight: 600;">
+                                <i class="bi bi-person-fill me-2" style="color: #ff6b35;"></i>
+                                Tên của bạn
+                            </label>
+                            <input type="text" class="form-control" placeholder="Nhập tên của bạn..." style="border-color: #ff6b35; border-left: 4px solid #ff6b35;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #1a1a1a; font-weight: 600;">
+                                <i class="bi bi-envelope-fill me-2" style="color: #ff6b35;"></i>
+                                Email
+                            </label>
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn..." style="border-color: #ff6b35; border-left: 4px solid #ff6b35;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" style="color: #1a1a1a; font-weight: 600;">
+                                <i class="bi bi-chat-dots-fill me-2" style="color: #ff6b35;"></i>
+                                Chủ Đề
+                            </label>
+                            <input type="text" class="form-control" placeholder="Chủ đề của bạn..." style="border-color: #ff6b35; border-left: 4px solid #ff6b35;">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" style="color: #1a1a1a; font-weight: 600;">
+                                <i class="bi bi-chat-left-text-fill me-2" style="color: #ff6b35;"></i>
+                                Tin Nhắn
+                            </label>
+                            <textarea class="form-control" rows="5" placeholder="Nhập tin nhắn của bạn..." style="border-color: #ff6b35; border-left: 4px solid #ff6b35;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-lg w-100" style="background: linear-gradient(135deg, #ff6b35 0%, #ff8c53 100%); color: white; font-weight: 700; border: none; border-radius: 8px; padding: 12px; transition: all 0.3s ease;">
+                            <i class="bi bi-send-fill me-2"></i>
+                            Gửi Tin Nhắn
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="mt-5 p-4 rounded-3" style="background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); border-left: 5px solid #ffc107;">
+                <h5 style="color: #1a1a1a; font-weight: 700; margin-bottom: 1rem;">
+                    <i class="bi bi-info-circle-fill me-2" style="color: #ffc107;"></i>
+                    Thông Tin Thêm
+                </h5>
+                <p class="text-muted mb-0">
+                    Chúng tôi cam kết phục vụ khách hàng với chất lượng tốt nhất. 
+                    Tất cả những câu hỏi sẽ được trả lời trong vòng 24 giờ. 
+                    Cảm ơn bạn đã tin tưởng Sneaker Kingdom!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        border-color: #ff6b35 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+    }
+
+    button[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
+    }
+</style>

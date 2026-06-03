@@ -4,18 +4,58 @@
     ViewData["Title"] = "Danh sách danh mục";
 }
 
-<h2 class="mb-4">Danh sách danh mục sản phẩm</h2>
+<style>
+    .basketball-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-header h2 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-basketball {
+        background-color: #ff6b35;
+        border-color: #ff6b35;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-basketball:hover {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 107, 53, 0.08);
+    }
+</style>
+
+<div class="basketball-header">
+    <h2><i class="bi bi-folder-fill me-2"></i>Danh sách danh mục</h2>
+</div>
 
 <p>
-    <a asp-action="Add" class="btn btn-success">Thêm danh mục mới</a>
+    <a asp-action="Add" class="btn btn-basketball">
+        <i class="bi bi-plus-circle"></i> Thêm danh mục mới
+    </a>
 </p>
 
 <table class="table table-bordered table-hover align-middle">
     <thead class="table-light text-center">
-        <tr>
-            <th style="width: 20%;">Mã danh mục (ID)</th>
-            <th style="width: 60%;">Tên danh mục</th>
-            <th style="width: 20%;">Hành động</th>
+        <tr style="background-color: #f5f5f5;">
+            <th style="width: 20%; color: #1a1a1a;"><i class="bi bi-hash me-1"></i>Mã danh mục</th>
+            <th style="width: 60%; color: #1a1a1a;"><i class="bi bi-tag me-1"></i>Tên danh mục</th>
+            <th style="width: 20%; color: #1a1a1a;"><i class="bi bi-lightning me-1"></i>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -24,12 +64,20 @@
             foreach (var item in Model)
             {
                 <tr>
-                    <td class="text-center">@item.Id</td>
-                    <td class="fw-bold">@item.Name</td>
+                    <td class="text-center text-dark fw-bold">
+                        <span class="badge bg-light text-dark" style="font-size: 0.95rem;">@item.Id</span>
+                    </td>
+                    <td class="fw-bold text-dark">
+                        <i class="bi bi-shoe text-danger me-2"></i>@item.Name
+                    </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm text-white me-1">Sửa</a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm me-1" title="Chỉnh sửa">
+                                <i class="bi bi-pencil-fill"></i> Sửa
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm" title="Xóa">
+                                <i class="bi bi-trash-fill"></i> Xóa
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -38,7 +86,10 @@
         else
         {
             <tr>
-                <td colspan="3" class="text-center text-muted p-4">Chưa có danh mục nào.</td>
+                <td colspan="3" class="text-center text-muted p-4">
+                    <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                    <p class="mt-2 mb-0">Chưa có danh mục nào.</p>
+                </td>
             </tr>
         }
     </tbody>

@@ -3,7 +3,7 @@ using BaiTapThucHanh.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
-using Microsoft.AspNetCore.Identity; // THÊM THƯ VIỆN NÀY ĐỂ SỬ DỤNG IDENTITYUSER
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 // 1. CẤU HÌNH CÁC DỊCH VỤ (SERVICES) - PHẢI NẰM TRƯỚC builder.Build()
 // =========================================================================
 
-// Cấu hình kết nối SQL Server thông qua AppDbContext
+// Cấu hình kết nối với In-Memory Database để test giao diện
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseInMemoryDatabase("BaiTapThucHanh"));
 
 // -------------------------------------------------------------------------
 // THÊM ĐOẠN NÀY: CẤU HÌNH DỊCH VỤ CỦA ASP.NET CORE IDENTITY
@@ -85,6 +85,10 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
+        // Khởi tạo database schema
+        var context = services.GetRequiredService<AppDbContext>();
+        context.Database.EnsureCreated();
+
         // Chạy hàm tạo Role Admin và User Admin mẫu bất đồng bộ
         await DbSeeder.SeedRolesAndAdminAsync(services);
     }

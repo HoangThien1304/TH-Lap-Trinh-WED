@@ -4,20 +4,78 @@
     ViewData["Title"] = "Sửa danh mục";
 }
 
-<h1>Cập nhật danh mục</h1>
+<style>
+    .basketball-form-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-form-header h1 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+    
+    .form-control {
+        border: 2px solid #e8e8e8;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #ff6b35;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    }
+    
+    .btn-basketball {
+        background-color: #ff6b35;
+        border-color: #ff6b35;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-basketball:hover {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+        transform: translateY(-2px);
+        color: white;
+        box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    }
+</style>
 
-<form asp-action="Update">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
+<div class="basketball-form-header">
+    <h1><i class="bi bi-pencil-fill me-2"></i>Cập nhật danh mục</h1>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Tên danh mục</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Update" class="card p-4 shadow-sm">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none" role="alert"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"><i class="bi bi-folder-fill me-1 text-danger"></i>Tên danh mục</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+            </div>
+
+            <div class="mb-3 d-flex gap-2">
+                <button type="submit" class="btn btn-basketball px-4">
+                    <i class="bi bi-check-circle me-2"></i>Cập nhật
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </form>
     </div>
-
-    <div class="mb-3">
-        <button type="submit" class="btn btn-warning text-white">Cập nhật</button>
-        <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
-    </div>
-</form>
+</div>

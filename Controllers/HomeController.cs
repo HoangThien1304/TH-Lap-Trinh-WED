@@ -44,5 +44,10 @@ namespace BaiTapThucHanh.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

@@ -4,45 +4,104 @@
     ViewData["Title"] = "Thêm sản phẩm mới";
 }
 
-<h1>Thêm sản phẩm mới</h1>
+<style>
+    .basketball-form-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-form-header h1 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #1a1a1a;
+    }
+    
+    .form-control, .form-select {
+        border: 2px solid #e8e8e8;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #ff6b35;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+    }
+    
+    .btn-basketball {
+        background-color: #ff6b35;
+        border-color: #ff6b35;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-basketball:hover {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+        transform: translateY(-2px);
+        color: white;
+        box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    }
+</style>
 
-<form asp-action="Add" enctype="multipart/form-data">
-    <div asp-validation-summary="All" class="text-danger"></div>
+<div class="basketball-form-header">
+    <h1><i class="bi bi-plus-circle me-2"></i>Thêm sản phẩm mới</h1>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">Tên sản phẩm</label>
-        <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm..." />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Add" enctype="multipart/form-data" class="card p-4 shadow-sm">
+            <div asp-validation-summary="All" class="alert alert-danger d-none" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"><i class="bi bi-tag me-1 text-danger"></i>Tên sản phẩm</label>
+                <input asp-for="Name" class="form-control" placeholder="Nhập tên sản phẩm..." />
+                <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Price" class="form-label"><i class="bi bi-cash-coin me-1 text-danger"></i>Giá bán</label>
+                <input asp-for="Price" class="form-control" type="number" step="0.01" placeholder="Nhập giá bán..." />
+                <span asp-validation-for="Price" class="text-danger small d-block mt-1"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"><i class="bi bi-chat-left me-1 text-danger"></i>Mô tả sản phẩm</label>
+                <textarea asp-for="Description" class="form-control" rows="4" placeholder="Nhập mô tả chi tiết..."></textarea>
+                <span asp-validation-for="Description" class="text-danger small d-block mt-1"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label"><i class="bi bi-folder me-1 text-danger"></i>Danh mục sản phẩm</label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger small d-block mt-1"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageFile" class="form-label"><i class="bi bi-image me-1 text-danger"></i>Hình ảnh sản phẩm</label>
+                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger small d-block mt-1"></span>
+                <small class="text-muted">Chỉ chấp nhận file ảnh (JPG, PNG, GIF...)</small>
+            </div>
+
+            <div class="mb-3 d-flex gap-2">
+                <button type="submit" class="btn btn-basketball px-4">
+                    <i class="bi bi-check-circle me-2"></i>Thêm sản phẩm
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                    <i class="bi bi-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </form>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label">Giá bán</label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" placeholder="Nhập giá bán..." />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label">Mô tả sản phẩm</label>
-        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Nhập mô tả chi tiết..."></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="CategoryId" class="form-label">Danh mục sản phẩm</label>
-        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
-            <option value="">-- Chọn danh mục --</option>
-        </select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="ImageFile" class="form-label">Hình ảnh sản phẩm</label>
-        <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
-        <span asp-validation-for="ImageFile" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Thêm mới</button>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
-    </div>
-</form>
+</div>

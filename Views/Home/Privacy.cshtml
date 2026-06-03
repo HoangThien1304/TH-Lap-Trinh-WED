@@ -1,6 +1,59 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Chính sách bảo mật";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<style>
+    .basketball-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-header h1 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+</style>
+
+<div class="basketball-header">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<div class="card shadow-sm rounded-3 p-4">
+    <h5 class="fw-bold text-dark mb-3">
+        <i class="bi bi-shield-check me-2" style="color: #ff6b35;"></i>
+        Chính sách bảo mật của Court Kicks Basketball
+    </h5>
+
+    <p class="text-muted lh-lg">
+        Chúng tôi cam kết bảo vệ quyền riêng tư của bạn. Trang này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ dữ liệu của bạn.
+    </p>
+
+    <h6 class="fw-bold text-dark mt-4 mb-2">
+        <i class="bi bi-info-circle me-2" style="color: #ff6b35;"></i>
+        Thông tin được thu thập
+    </h6>
+    <p class="text-muted">
+        Chúng tôi có thể thu thập thông tin như tên, email, địa chỉ và thông tin liên hệ khác khi bạn sử dụng dịch vụ của chúng tôi.
+    </p>
+
+    <h6 class="fw-bold text-dark mt-4 mb-2">
+        <i class="bi bi-lock me-2" style="color: #ff6b35;"></i>
+        Bảo vệ dữ liệu
+    </h6>
+    <p class="text-muted">
+        Dữ liệu của bạn được bảo vệ bằng các biện pháp bảo mật tiêu chuẩn ngành và được lưu trữ an toàn.
+    </p>
+
+    <h6 class="fw-bold text-dark mt-4 mb-2">
+        <i class="bi bi-question-circle me-2" style="color: #ff6b35;"></i>
+        Liên hệ chúng tôi
+    </h6>
+    <p class="text-muted">
+        Nếu bạn có bất kỳ câu hỏi nào về chính sách bảo mật của chúng tôi, vui lòng liên hệ với chúng tôi.
+    </p>
+</div>

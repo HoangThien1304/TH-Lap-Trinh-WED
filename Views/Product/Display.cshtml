@@ -1,45 +1,45 @@
 ﻿@model BaiTapThucHanh.Models.Product
 
 @{
-    ViewData["Title"] = "Chi tiết sản phẩm - BR26";
+    ViewData["Title"] = "Chi tiết sản phẩm - Court Kicks";
 }
 
 <style>
-    /* STYLE CHI TIẾT SẢN PHẨM PHONG CÁCH WORLD CUP BRAZIL */
+    /* STYLE CHI TIẾT SẢN PHẨM PHONG CÁCH BASKETBALL */
     .br-detail-box {
-        border-top: 4px solid #009b3a; /* Đường viền xanh lá trên đỉnh */
+        border-top: 4px solid #ff6b35;
         transition: all 0.3s ease;
     }
 
     .br-badge-cat {
-        background-color: #fedf00 !important;
-        color: #002776 !important;
+        background: linear-gradient(135deg, #ff6b35, #ff8c00) !important;
+        color: white !important;
         font-weight: 700;
         letter-spacing: 0.5px;
     }
 
     .price-tag {
-        font-size: 1.8rem;
-        color: #dc3545;
-        font-weight: 800;
+        font-size: 2rem;
+        color: #ff6b35;
+        font-weight: 900;
         text-shadow: 1px 1px 0px rgba(0,0,0,0.05);
     }
 
     .btn-br-back {
-        border: 2px solid #002776;
-        color: #002776;
+        border: 2px solid #1a1a1a;
+        color: #1a1a1a;
         font-weight: 600;
         transition: all 0.3s ease;
     }
 
         .btn-br-back:hover {
-            background-color: #002776;
+            background-color: #1a1a1a;
             color: #ffffff;
             transform: translateX(-3px);
         }
 
     .btn-br-edit {
-        background: linear-gradient(135deg, #009b3a 0%, #007b2e 100%);
+        background: linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%);
         color: white;
         font-weight: 600;
         border: none;
@@ -47,29 +47,30 @@
     }
 
         .btn-br-edit:hover {
-            background: linear-gradient(135deg, #fedf00 0%, #e5c700 100%);
-            color: #002776;
-            box-shadow: 0 4px 12px rgba(254, 223, 0, 0.3);
+            background: linear-gradient(135deg, #ff8c00 0%, #ffc107 100%);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
         }
 
     .img-container {
-        border: 1px solid rgba(0,0,0,0.05);
-        background-color: #f8f9fa;
+        border: 2px solid #ff6b35;
+        background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
         min-height: 350px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        border-radius: 12px;
     }
 </style>
 
 <div class="container py-4">
     <div class="mb-4 d-flex justify-content-between align-items-center">
         <h2 class="text-dark fw-bold m-0">
-            <i class="bi bi-trophy-fill text-warning me-2"></i>Chi Tiết Sản Phẩm
+            <i class="bi bi-shoe text-danger me-2"></i>Chi Tiết Sản Phẩm
         </h2>
         <a asp-action="Index" class="btn btn-br-back rounded-pill px-4">
-            <i class="bi bi-arrow-left me-1"></i> Quay lại danh sách
+            <i class="bi bi-arrow-left me-1"></i> Quay lại
         </a>
     </div>
 
@@ -85,7 +86,7 @@
                     else
                     {
                         <div class="text-center text-muted py-5">
-                            <i class="bi bi-image" style="font-size: 5rem; color: #dee2e6;"></i>
+                            <i class="bi bi-shoe" style="font-size: 5rem; color: #ff6b35; opacity: 0.3;"></i>
                             <p class="mt-2 mb-0 small">Sản phẩm chưa cập nhật hình ảnh</p>
                         </div>
                     }
@@ -110,14 +111,14 @@
 
                     <h1 class="display-6 text-dark fw-bold mb-3">@Model.Name</h1>
 
-                    <div class="bg-light p-3 rounded-3 mb-4 border-start border-danger border-4">
-                        <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 0.5px;">Giá bán niêm yết</small>
-                        <span class="price-tag">@Model.Price.ToString("#,##0") <span style="font-size: 1.2rem;">VNĐ</span></span>
+                    <div class="bg-danger bg-opacity-10 p-4 rounded-3 mb-4 border-start border-danger border-4">
+                        <small class="text-muted d-block text-uppercase fw-bold mb-2" style="font-size: 0.75rem; letter-spacing: 0.5px;">Giá niêm yết</small>
+                        <span class="price-tag">@Model.Price.ToString("#,##0") <span style="font-size: 1.3rem;">đ</span></span>
                     </div>
 
                     <div class="mb-4">
-                        <h5 class="fw-bold text-secondary mb-2">
-                            <i class="bi bi-file-earmark-text-fill me-1 text-success"></i> Đặc điểm nổi bật:
+                        <h5 class="fw-bold text-dark mb-2">
+                            <i class="bi bi-file-earmark-text-fill me-2" style="color: #ff6b35;"></i> Mô tả sản phẩm
                         </h5>
                         <p class="text-muted lh-base p-3 bg-light rounded-3" style="white-space: pre-line; font-size: 1.05rem;">
                             @if (!string.IsNullOrEmpty(Model.Description))
@@ -131,9 +132,16 @@
                         </p>
                     </div>
 
+                    <div class="d-flex gap-3 mt-5">
+                        <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-br-edit btn-lg px-5 rounded-3">
+                            <i class="bi bi-pencil-fill me-2"></i> Chỉnh sửa
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-lg px-5 rounded-3">
+                            <i class="bi bi-trash-fill me-2"></i> Xóa
+                        </a>
+                    </div>
+
                 </div>
-
-
             </div>
 
         </div>

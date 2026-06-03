@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - World Cup 2026 Edition</title>
+    <title>@ViewData["Title"] - Sneaker Kingdom | Cửa Hàng Giày Sneaker Chuyên Nghiệp</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -11,194 +11,127 @@
     <link rel="stylesheet" href="~/BaiTapThucHanh.styles.css" asp-append-version="true" />
 
     <style>
-        /* === ĐỊNH NGHĨA PHONG CÁCH WORLD CUP 2026 BRAZIL === */
+        /* === PHONG CÁCH BASKETBALL TRẺ TRUNG NĂNG ĐỘNG === */
         body {
-        background-color: #f7f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* KHU VỰC LOGO TO TRÊN CÙNG - Nền gradient xanh lá Brazil */
+        /* HEADER - Nền gradient đen & cam hiện đại */
         .br-top-header {
-        background: linear-gradient(135deg, #009b3a 0%, #007b2e 100%);
-        padding: 2rem 1rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        padding: 1.5rem 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         position: relative;
         }
 
-        /* LOGO SIÊU TO VÀ CĂN GIỮA */
+        /* LOGO LỚNVÀ ĐỘC ĐÁO */
         .br-brand-giant {
-        color: #fedf00 !important;
+        color: #ff6b35 !important;
         font-weight: 900;
-        letter-spacing: 2px;
-        font-size: 3rem;
-        text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        letter-spacing: 1px;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
         text-decoration: none;
-        animation: sambaBlink 1.5s infinite ease-in-out;
         display: inline-block;
-        }
-
-        .br-brand-giant:hover {
-        color: #ffffff !important;
-        animation-play-state: paused;
-        }
-
-        /* NÚT BẤM LOA PHÁT NHẠC SAMBA */
-        .audio-toggle-btn {
-        background: #fedf00;
-        color: #002776;
-        border: none;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        font-size: 1.3rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-        margin-left: 15px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .audio-toggle-btn:hover {
-        transform: scale(1.1);
-        background-color: #ffffff;
-        }
-
-        /* Hiệu ứng sóng nhạc lan tỏa khi đang phát */
-        .audio-playing {
-        animation: pulse 1s infinite alternate;
-        }
-
-        @@code { /* Ngăn Razor biên dịch nhầm CSS */
-        }
-
-        @@keyframes pulse {
-        0% {
-        box-shadow: 0 0 0 0 rgba(254, 223, 0, 0.7);
-        }
-
-        100% {
-        box-shadow: 0 0 0 10px rgba(254, 223, 0, 0);
-        }
-        }
-
-        /* HIỆU ỨNG NHẤP NHÁY SAMBA */
-        @@keyframes sambaBlink {
-        0% {
-        color: #fedf00;
-        transform: scale(1);
-        text-shadow: 0 0 15px rgba(254, 223, 0, 0.6);
-        }
-
-        50% {
-        color: #ffffff;
-        transform: scale(1.03);
-        text-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 35px #fedf00;
-        }
-
-        100% {
-        color: #fedf00;
-        transform: scale(1);
-        text-shadow: 0 0 15px rgba(254, 223, 0, 0.6);
-        }
-        }
-
-        /* THANH MENU NẰM PHÍA DƯỚI */
-        .br-navbar-bottom {
-        background-color: #002776 !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-        padding: 0.5rem 1rem;
-        }
-
-        /* Định hình các nút Menu liên kết */
-        .br-nav-link {
-        color: rgba(255, 255, 255, 0.9) !important;
-        font-weight: 600;
-        padding: 0.6rem 1.2rem !important;
-        margin: 0 0.2rem;
-        border-radius: 50px;
         transition: all 0.3s ease;
         }
 
+        .br-brand-giant:hover {
+        color: #ffc107 !important;
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+        }
+
+        /* THANH MENU - Màu đen bóng bẩy */
+        .br-navbar-bottom {
+        background-color: #0d0d0d !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25) !important;
+        padding: 0.8rem 1rem;
+        border-bottom: 3px solid #ff6b35;
+        }
+
+        /* MENU LINKS - Trẻ trung với hiệu ứng hover */
+        .br-nav-link {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-weight: 600;
+        padding: 0.7rem 1.2rem !important;
+        margin: 0 0.3rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        }
+
         .br-nav-link:hover {
-        background-color: #fedf00 !important;
-        color: #002776 !important;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        background-color: #ff6b35 !important;
+        color: #ffffff !important;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
         }
 
         .br-nav-link.active {
-        background-color: rgba(255, 255, 255, 0.2) !important;
-        color: #fedf00 !important;
-        border: 1px solid rgba(254, 223, 0, 0.4);
+        background: linear-gradient(135deg, #ff6b35, #ffc107) !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 10px rgba(255, 107, 53, 0.4);
         }
 
+        /* HAMBURGER MENU */
         .br-toggler {
-        border-color: rgba(254, 223, 0, 0.5) !important;
+        border-color: rgba(255, 107, 53, 0.7) !important;
         padding: 0.4rem;
         }
 
         .br-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28254, 223, 0, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 107, 53, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
         }
 
-        /* Định hình lại chữ và nút bấm Identity ở một góc riêng biệt */
+        /* IDENTITY LINKS */
         .br-navbar-bottom .nav-link:not(.br-nav-link) {
-        color: #fedf00 !important;
+        color: #ffc107 !important;
         font-weight: 600;
         }
 
         .br-navbar-bottom .nav-link:not(.br-nav-link):hover {
-        color: #ffffff !important;
+        color: #ff6b35 !important;
         }
 
         .br-navbar-bottom .btn-link {
-        color: #ffffff !important;
+        color: #ffc107 !important;
         text-decoration: none;
         font-weight: 600;
         }
 
         .br-navbar-bottom .btn-link:hover {
-        color: #ffc107 !important;
+        color: #ff6b35 !important;
         }
 
+        /* FOOTER - Đen với accent cam */
         .br-footer {
-        background-color: #002776;
+        background-color: #0d0d0d;
         color: rgba(255,255,255,0.7) !important;
         padding: 1.5rem 0;
         margin-top: 5rem;
-        border-top: 4px solid #fedf00 !important;
+        border-top: 4px solid #ff6b35 !important;
         }
 
         .br-footer a {
-        color: #fedf00;
+        color: #ff6b35;
         text-decoration: none;
         font-weight: bold;
         }
 
         .br-footer a:hover {
-        color: #ffffff;
+        color: #ffc107;
         text-decoration: underline;
         }
-    </style>
 </head>
 <body>
     <header class="mb-4">
         <div class="br-top-header text-center">
             <div class="container d-flex align-items-center justify-content-center flex-wrap">
                 <a class="br-brand-giant" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-trophy-fill me-2 text-warning"></i>HUY88 SHOP
+                    <i class="bi bi-basket2-fill me-2"></i>SNEAKER KINGDOM
                 </a>
-
-                <button id="musicBtn" class="audio-toggle-btn" title="Bật/Tắt nhạc World Cup">
-                    <i id="speakerIcon" class="bi bi-volume-mute-fill"></i>
-                </button>
-
-                <audio id="wcAudio" loop>
-                    <source src="/audio/Brazil tema Neymar Samba dance [BBxJ8yXMbDI].mp3" type="audio/mpeg">
-                </audio>
             </div>
         </div>
 
@@ -219,7 +152,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link br-nav-link" asp-area="" asp-controller="Product" asp-action="Index">
-                                <i class="bi bi-grid-3x3-gap-fill me-1"></i> Danh Sách Sản Phẩm
+                                <i class="bi bi-grid-3x3-gap-fill me-1"></i> Sản Phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                                <i class="bi bi-telephone-fill me-1"></i> Liên Hệ
                             </a>
                         </li>
                         <li class="nav-item">
@@ -250,32 +188,14 @@
 
     <footer class="br-footer text-center">
         <div class="container">
-            <p class="mb-1">&copy; 2026 - <strong>BaiTapThucHanh</strong> - Bản Quyền Thuộc Về HUY88 SHOP</p>
-            <small>Đường dẫn bảo mật: <a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách Bảo mật (Privacy)</a></small>
+            <p class="mb-1">&copy; 2026 - <strong>Sneaker Kingdom</strong> - Cửa Hàng Giày Sneaker Chuyên Nghiệp</p>
+            <small>Chính sách bảo mật: <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></small>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
-    <script>
-        const audio = document.getElementById('wcAudio');
-        const btn = document.getElementById('musicBtn');
-        const icon = document.getElementById('speakerIcon');
-
-        btn.addEventListener('click', function() {
-        if (audio.paused) {
-        audio.play();
-        icon.className = 'bi bi-volume-up-fill';
-        btn.classList.add('audio-playing');
-        } else {
-        audio.pause();
-        icon.className = 'bi bi-volume-mute-fill';
-        btn.classList.remove('audio-playing');
-        }
-        });
-    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

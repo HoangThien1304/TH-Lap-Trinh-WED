@@ -4,20 +4,67 @@
     ViewData["Title"] = "Xóa danh mục";
 }
 
-<h3 class="text-danger">Bạn có chắc chắn muốn xóa danh mục này không?</h3>
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Mã danh mục:</dt>
-        <dd class="col-sm-10">@Model.Id</dd>
+<style>
+    .basketball-delete-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-delete-header h2 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .delete-warning-box {
+        background: rgba(255, 107, 53, 0.1);
+        border: 2px solid #ff6b35;
+        border-radius: 12px;
+    }
+</style>
 
-        <dt class="col-sm-2">Tên danh mục:</dt>
-        <dd class="col-sm-10 fw-bold">@Model.Name</dd>
-    </dl>
+<div class="basketball-delete-header">
+    <h2><i class="bi bi-exclamation-triangle-fill me-2"></i>Xác nhận xóa danh mục</h2>
+</div>
 
-    <form asp-action="DeleteConfirmed">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Xác nhận xóa</button>
-        <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
-    </form>
+<div class="delete-warning-box p-4 mb-4">
+    <div class="alert alert-warning mb-0" role="alert">
+        <i class="bi bi-exclamation-circle me-2"></i>
+        <strong>Cảnh báo!</strong> Hành động này không thể hoàn tác. Vui lòng xác nhận để xóa danh mục.
+    </div>
+</div>
+
+<div class="card shadow-sm rounded-3">
+    <div class="card-body p-4">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="bg-light p-3 rounded">
+                    <small class="text-muted d-block">Mã danh mục</small>
+                    <span class="fw-bold text-dark fs-5">@Model.Id</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-light p-3 rounded">
+                    <small class="text-muted d-block">Tên danh mục</small>
+                    <span class="fw-bold text-dark fs-5">
+                        <i class="bi bi-folder-fill me-2" style="color: #ff6b35;"></i>@Model.Name
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="DeleteConfirmed" class="d-flex gap-2">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger px-4">
+                <i class="bi bi-trash-fill me-2"></i>Xác nhận xóa
+            </button>
+            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                <i class="bi bi-arrow-left me-2"></i>Hủy bỏ
+            </a>
+        </form>
+    </div>
 </div>

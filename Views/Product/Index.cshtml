@@ -4,23 +4,61 @@
     ViewData["Title"] = "Danh sách sản phẩm";
 }
 
-<h2 class="mb-4">Danh sách sản phẩm</h2>
+<style>
+    .basketball-header {
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+        color: #ff6b35;
+        padding: 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+    
+    .basketball-header h2 {
+        margin: 0;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-basketball {
+        background-color: #ff6b35;
+        border-color: #ff6b35;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-basketball:hover {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 107, 53, 0.08);
+    }
+</style>
+
+<div class="basketball-header">
+    <h2><i class="bi bi-shoe me-2"></i>Danh sách sản phẩm</h2>
+</div>
 
 <p>
-    <a asp-action="Add" class="btn btn-success">
+    <a asp-action="Add" class="btn btn-basketball">
         <i class="bi bi-plus-circle"></i> Thêm sản phẩm mới
     </a>
 </p>
 
 <table class="table table-bordered table-hover align-middle">
     <thead class="table-light text-center">
-        <tr>
-            <th style="width: 20%;">Tên sản phẩm</th>
-            <th style="width: 15%;">Hình ảnh</th>
-            <th style="width: 15%;">Danh mục</th>
-            <th style="width: 15%;">Giá bán</th>
-            <th style="width: 15%;">Mô tả</th>
-            <th style="width: 20%;">Hành động</th>
+        <tr style="background-color: #f5f5f5;">
+            <th style="width: 20%; color: #1a1a1a;"><i class="bi bi-tag me-1"></i>Tên sản phẩm</th>
+            <th style="width: 15%; color: #1a1a1a;"><i class="bi bi-image me-1"></i>Hình ảnh</th>
+            <th style="width: 15%; color: #1a1a1a;"><i class="bi bi-folder me-1"></i>Danh mục</th>
+            <th style="width: 15%; color: #1a1a1a;"><i class="bi bi-cash-coin me-1"></i>Giá bán</th>
+            <th style="width: 15%; color: #1a1a1a;"><i class="bi bi-chat-left me-1"></i>Mô tả</th>
+            <th style="width: 20%; color: #1a1a1a;"><i class="bi bi-lightning me-1"></i>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -29,11 +67,11 @@
             @foreach (var product in Model)
             {
                 <tr>
-                    <td class="fw-bold">@product.Name</td>
+                    <td class="fw-bold text-dark">@product.Name</td>
                     <td class="text-center">
                         @if (!string.IsNullOrEmpty(product.ImageUrl))
                         {
-                            <img src="/images/@product.ImageUrl" width="80" height="80" class="img-thumbnail" style="object-fit: cover;" alt="@product.Name" />
+                            <img src="/images/@product.ImageUrl" width="80" height="80" class="img-thumbnail" style="object-fit: cover; border: 2px solid #ff6b35;" alt="@product.Name" />
                         }
                         else
                         {
@@ -44,7 +82,7 @@
                     <td class="text-center">
                         @if (product.Category != null)
                         {
-                            <span class="badge bg-secondary px-3 py-2">@product.Category.Name</span>
+                            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger px-3 py-2">@product.Category.Name</span>
                         }
                         else
                         {
@@ -52,19 +90,19 @@
                         }
                     </td>
 
-                    <td class="text-end text-danger fw-bold">
-                        @product.Price.ToString("#,##0") VNĐ
+                    <td class="text-end text-danger fw-bold" style="font-size: 1.1rem;">
+                        @product.Price.ToString("#,##0") <small>đ</small>
                     </td>
                     <td>
-                        <span class="text-truncate d-inline-block" style="max-width: 180px;" title="@product.Description">
+                        <span class="text-truncate d-inline-block" style="max-width: 180px; color: #666;" title="@product.Description">
                             @product.Description
                         </span>
                     </td>
                     <td class="text-center">
                         <div class="btn-group" role="group">
-                            <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-info btn-sm text-white">Xem</a>
-                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-warning btn-sm text-white mx-1">Sửa</a>
-                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger btn-sm">Xóa</a>
+                            <a asp-action="Display" asp-route-id="@product.Id" class="btn btn-outline-primary btn-sm" title="Xem chi tiết"><i class="bi bi-eye-fill"></i> Xem</a>
+                            <a asp-action="Update" asp-route-id="@product.Id" class="btn btn-outline-warning btn-sm" title="Chỉnh sửa"><i class="bi bi-pencil-fill"></i> Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger btn-sm" title="Xóa"><i class="bi bi-trash-fill"></i> Xóa</a>
                         </div>
                     </td>
                 </tr>
@@ -73,7 +111,10 @@
         else
         {
             <tr>
-                <td colspan="6" class="text-center text-muted p-4">Hiện chưa có sản phẩm nào trong hệ thống.</td>
+                <td colspan="6" class="text-center text-muted p-4">
+                    <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                    <p class="mt-2 mb-0">Hiện chưa có sản phẩm nào trong hệ thống.</p>
+                </td>
             </tr>
         }
     </tbody>
