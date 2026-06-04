@@ -1,6 +1,5 @@
-﻿using BaiTapThucHanh.Models;
+﻿﻿using BaiTapThucHanh.Models;
 using System.Collections.Generic;
-using BaiTapThucHanh.Models;
 
 public class MockCategoryRepository : ICategoryRepository
 {

@@ -1,7 +1,6 @@
-﻿using BaiTapThucHanh.Models;
+﻿﻿using BaiTapThucHanh.Models;
 using System.Collections.Generic;
     using System.Linq;
-    using BaiTapThucHanh.Models;
 
     public class MockProductRepository : IProductRepository
     {
@@ -9,7 +8,7 @@ using System.Collections.Generic;
 
         public MockProductRepository()
         {
-            
+            _products = new List<Product>();
         }
 
         public IEnumerable<Product> GetAll()
@@ -17,14 +16,14 @@ using System.Collections.Generic;
             return _products;
         }
 
-        public Product GetById(int id)
+        public Product? GetById(int id)
         {
             return _products.FirstOrDefault(p => p.Id == id);
         }
 
         public void Add(Product product)
         {
-            product.Id = _products.Max(p => p.Id) + 1;
+            product.Id = _products.Count > 0 ? _products.Max(p => p.Id) + 1 : 1;
             _products.Add(product);
         }
 
@@ -46,4 +45,3 @@ using System.Collections.Generic;
             }
         }
     }
-

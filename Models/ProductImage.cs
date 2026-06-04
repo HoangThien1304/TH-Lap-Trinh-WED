@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BaiTapThucHanh.Models
@@ -12,7 +12,7 @@ namespace BaiTapThucHanh.Models
         // Lưu tên file ảnh phụ tương tự như thuộc tính ImageUrl bên Product.cs
         [Required(ErrorMessage = "Đường dẫn hình ảnh không được để trống.")]
         [StringLength(255)]
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = null!;
 
         // Khóa ngoại lưu Id của sản phẩm sở hữu hình ảnh này
         [Required]

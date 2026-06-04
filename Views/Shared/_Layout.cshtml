@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -124,6 +124,7 @@
         color: #ffc107;
         text-decoration: underline;
         }
+    </style>
 </head>
 <body>
     <header class="mb-4">
@@ -137,11 +138,19 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark br-navbar-bottom">
             <div class="container">
-                <button class="navbar-toggler br-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon br-toggler-icon"></span>
-                    <span class="text-warning small ms-1">MENU</span>
-                </button>
+                <div class="d-flex align-items-center order-lg-last">
+                    <a href="/Cart" class="nav-link text-white me-3 position-relative" title="Giỏ hàng">
+                        <i class="bi bi-cart-fill fs-4 text-warning"></i>
+                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
+                            0
+                        </span>
+                    </a>
+                    <button class="navbar-toggler br-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon br-toggler-icon"></span>
+                        <span class="text-warning small ms-1">MENU</span>
+                    </button>
+                </div>
 
                 <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between text-center">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
@@ -196,6 +205,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Cập nhật số lượng giỏ hàng khi load trang
+        $.get("/Cart/GetCartCount", function(data) {
+            $("#cart-count").text(data.count);
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

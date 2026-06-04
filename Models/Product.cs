@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 
@@ -10,13 +10,13 @@ namespace BaiTapThucHanh.Models
 
         [Required(ErrorMessage = "Vui lòng nhập tên sản phẩm.")]
         [StringLength(100)]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Vui lòng nhập giá sản phẩm.")]
         [Range(0, 100000000, ErrorMessage = "Giá sản phẩm phải nằm trong khoảng từ 0 đến 100,000,000 VNĐ.")]
         public decimal Price { get; set; }
 
-        public string Description { get; set; }
+        public string Description { get; set; } = null!;
 
         public int CategoryId { get; set; }
 

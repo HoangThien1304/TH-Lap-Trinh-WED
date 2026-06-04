@@ -2,34 +2,27 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav align-items-center gap-2">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white fw-bold px-3 py-1 rounded-pill bg-success bg-opacity-25 border border-success border-opacity-50"
-               asp-area="Identity" asp-page="/Account/Manage/Index" title="Quản lý tài khoản">
-                <i class="bi bi-person-circle text-warning me-1"></i> Xin chào, @(User.Identity?.Name?.Split('@')[0])!
-            </a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white fw-bold px-3 border-0 bg-transparent">
-                    <i class="bi bi-box-arrow-right text-danger me-1"></i> Đăng xuất
-                </button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white fw-bold" asp-area="Identity" asp-page="/Account/Register">
-                <i class="bi bi-person-plus-fill me-1 text-warning"></i> Đăng ký
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white fw-bold px-3 py-1 rounded-pill bg-warning text-dark shadow-sm" asp-area="Identity" asp-page="/Account/Login">
-                <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
-            </a>
-        </li>
-    }
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-white fw-bold" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            <i class="bi bi-person-circle"></i> Chào, @User.Identity?.Name!
+        </a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit" class="nav-link btn btn-link text-warning fw-bold border-0">Đăng xuất</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-white fw-bold" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-white fw-bold" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+    </li>
+}
 </ul>
