@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -124,6 +124,243 @@
         color: #ffc107;
         text-decoration: underline;
         }
+
+        /* IDENTITY UI BEAUTIFICATION */
+        /* Đồng bộ màu sắc tên sản phẩm/tiêu đề ở trang chủ */
+        .card-title a, .product-item-name, h5.card-title, .product-name {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .card-title a:hover, .product-item-name:hover, h5.card-title:hover, .product-name:hover {
+            color: #ff6b35 !important;
+        }
+
+        .br-title-border {
+            font-weight: 800;
+            text-transform: uppercase;
+            border-bottom: 4px solid #ff6b35;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+
+        section h2, 
+        .container main h1:not(.br-brand-giant h1) { 
+            font-weight: 900;
+            text-transform: uppercase; 
+            color: #1a1a1a;
+            border-left: 6px solid #ff6b35;
+            padding-left: 20px;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        /* === THIẾT KẾ ĐỒNG BỘ TRANG ĐĂNG NHẬP / ĐĂNG KÝ (IDENTITY) === */
+        
+        /* Target trực tiếp vào các phần tử của trang Identity mặc định */
+        main .row { --bs-gutter-x: 1.5rem; }
+
+        /* Card bao ngoài Form */
+        #account, #registerForm, form#external-account {
+            border: none !important;
+            border-radius: 20px !important;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            background-color: #ffffff !important;
+            border-top: 10px solid #ff6b35 !important;
+            padding: 3rem !important;
+            position: relative;
+        }
+
+        /* Xóa bỏ tên project "BaiTapThucHanh" xuất hiện ở tiêu đề mặc định của Identity */
+        body:has(#account) h1, body:has(#registerForm) h1 {
+            font-size: 0 !important;
+            margin-bottom: 2.5rem !important;
+            border: none !important;
+            padding: 0 !important;
+            text-align: center;
+        }
+        body:has(#account) h1::after {
+            content: "ĐĂNG NHẬP HỆ THỐNG";
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+        }
+        body:has(#registerForm) h1::after {
+            content: "ĐĂNG KÝ THÀNH VIÊN";
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+        }
+
+        /* Ẩn các thành phần mặc định rườm rà của Identity UI */
+        body:has(#account) h2, body:has(#registerForm) h2, 
+        body:has(#account) hr, body:has(#registerForm) hr { display: none !important; }
+
+        /* Tiêu đề trong các trang Auth */
+        main h1, main h2 {
+            color: #1a1a1a;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px;
+        }
+
+        /* Ô nhập liệu (Input Fields) */
+        .form-floating > .form-control {
+            border: 1px solid #dee2e6 !important;
+            border-radius: 10px !important;
+            transition: all 0.3s ease;
+            padding-top: 1.625rem;
+            padding-bottom: 0.625rem;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: #ff6b35 !important; /* Đổi sang màu Cam khi nhấn vào */
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1) !important;
+        }
+
+        /* Nút bấm chính (Login / Register Button) */
+        button[type="submit"].btn-primary, 
+        #login-submit, 
+        #registerSubmit {
+            background: #1a1a1a !important; /* Mặc định màu Đen */
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 10px !important;
+            padding: 14px 28px !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease !important;
+        }
+
+        button[type="submit"].btn-primary:hover, 
+        #login-submit:hover, 
+        #registerSubmit:hover {
+            background: #ff6b35 !important; /* Hover chuyển sang màu Cam */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3) !important;
+        }
+
+        /* Tinh chỉnh trang Login cụ thể */
+        section[id*="account"], section[id*="register"] {
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        /* Đảm bảo trang Identity luôn nằm giữa */
+        body:has(#account) main, body:has(#registerForm) main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        /* Các liên kết phụ (Quên mật khẩu, Đăng ký mới) */
+        main a {
+            color: #1a1a1a;
+            text-decoration: none !important;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        main a:hover {
+            color: #ff6b35;
+            text-decoration: underline;
+        }
+
+        /* Checkbox ghi nhớ đăng nhập */
+        .form-check-input:checked {
+            background-color: #ff6b35 !important;
+            border-color: #ff6b35 !important;
+        }
+
+        /* Màu cho các thông báo lỗi Validation */
+        .text-danger, .field-validation-error {
+            color: #d11111 !important;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Background đặc biệt cho các trang Auth */
+        body:has(form#account), body:has(form#registerForm) {
+            background: 
+                radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, rgba(248, 249, 250, 1) 100%),
+                url('https://www.transparenttextures.com/patterns/basketball.png') !important;
+        }
+        
+        /* Bo góc mượt cho container chính */
+        .container.bg-white { border-radius: 20px !important; }
+
+        /* Căn chỉnh lại container cho trang Identity để nó đẹp hơn */
+        .container main {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Ẩn bớt các đường viền mặc định của Identity */
+        hr {
+            opacity: 0.1;
+            margin: 2rem 0;
+        }
+
+        /* Làm đẹp các liên kết phụ (Quên mật khẩu, v.v.) */
+        .form-check-label { font-weight: 500; color: #666; }
+        section a { color: #ff6b35; font-weight: 600; text-decoration: none; transition: 0.2s; }
+        section a:hover { color: #1a1a1a; text-decoration: underline; }
+
+        /* Style riêng cho các checkbox */
+        .form-check-input:checked {
+            background-color: #ff6b35;
+            border-color: #ff6b35;
+        }
+        
+        /* Giỏ hàng table refinement */
+        .table-hover tbody tr:hover {
+            background-color: rgba(255, 107, 53, 0.02);
+        }
+
+        /* Custom styles for Login/Register buttons in header for consistency */
+        .btn-auth-login {
+            background-color: #1a1a1a;
+            border-color: #1a1a1a;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border-radius: 50rem !important; /* Ensure rounded-pill style */
+            padding: 0.5rem 1.5rem !important; /* Adjust padding */
+        }
+        .btn-auth-login:hover {
+            background-color: #ff6b35;
+            border-color: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-auth-register {
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            background-color: transparent;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border-radius: 50rem !important; /* Ensure rounded-pill style */
+            padding: 0.5rem 1.5rem !important; /* Adjust padding */
+        }
+        .btn-auth-register:hover {
+            background-color: #ff6b35;
+            border-color: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -131,7 +368,7 @@
         <div class="br-top-header text-center">
             <div class="container d-flex align-items-center justify-content-center flex-wrap">
                 <a class="br-brand-giant" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-basket2-fill me-2"></i>SNEAKER KINGDOM
+                    <i class="bi bi-dribbble me-2"></i>SNEAKER KINGDOM
                 </a>
             </div>
         </div>
@@ -139,7 +376,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark br-navbar-bottom">
             <div class="container">
                 <div class="d-flex align-items-center order-lg-last">
-                    <a href="/Cart" class="nav-link text-white me-3 position-relative" title="Giỏ hàng">
+                    <a asp-controller="Cart" asp-action="Index" class="nav-link text-white me-3 position-relative" title="Giỏ hàng">
                         <i class="bi bi-cart-fill fs-4 text-warning"></i>
                         <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.7rem;">
                             0
@@ -169,16 +406,20 @@
                                 <i class="bi bi-telephone-fill me-1"></i> Liên Hệ
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Product" asp-action="Add">
-                                <i class="bi bi-plus-circle-fill me-1"></i> Thêm Sản Phẩm Mới
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link br-nav-link" asp-area="" asp-controller="Category" asp-action="Index">
-                                <i class="bi bi-tags-fill me-1"></i> Quản Lý Danh Mục
-                            </a>
-                        </li>
+                        
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link br-nav-link" asp-area="" asp-controller="Product" asp-action="Add">
+                                    <i class="bi bi-plus-circle-fill me-1"></i> Thêm Sản Phẩm Mới
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link br-nav-link" asp-area="" asp-controller="Category" asp-action="Index">
+                                    <i class="bi bi-tags-fill me-1"></i> Quản Lý Danh Mục
+                                </a>
+                            </li>
+                        }
                     </ul>
 
                     <div class="d-flex align-items-center justify-content-center mt-2 mt-lg-0">

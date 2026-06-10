@@ -1,0 +1,105 @@
+@model IEnumerable<BaiTapThucHanh.Models.CartItem>
+@{
+    ViewData["Title"] = "Giỏ hàng của bạn";
+}
+
+<div class="container py-5">
+    <div class="mb-5 border-bottom pb-3" style="border-color: #ff6b35 !important;">
+        <h2 class="fw-bold text-uppercase" style="letter-spacing: 2px;">
+            <i class="bi bi-cart4 text-danger me-2"></i>Giỏ hàng của bạn
+        </h2>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-3 overflow-hidden mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th class="ps-4 py-3">Sản phẩm</th>
+                                    <th class="text-center">Giá</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-end pe-4">Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="ps-4 py-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded bg-light p-1 me-3" style="width: 70px; height: 70px;">
+                                                    <img src="/images/@item.ImageUrl" class="img-fluid" style="max-height: 100%; object-fit: contain;" />
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold">@item.ProductName</h6>
+                                                    <small class="text-muted text-uppercase" style="font-size: 0.7rem;">SKU: @item.ProductId</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center fw-semibold text-danger">@item.Price.ToString("N0") <small>đ</small></td>
+                                        <td class="text-center">
+                                            <span class="badge bg-light text-dark border px-3 py-2">@item.Quantity</span>
+                                        </td>
+                                        <td class="text-end pe-4 fw-bold text-dark">@item.Total.ToString("N0") <small>đ</small></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-outline-dark rounded-pill px-4 fw-bold">
+                    <i class="bi bi-arrow-left me-2"></i>Tiếp tục mua sắm
+                </a>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm rounded-3" style="border-top: 5px solid #ff6b35 !important;">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-4">Tóm tắt đơn hàng</h5>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="text-muted">Tạm tính:</span>
+                            <span class="fw-semibold">@Model.Sum(x => x.Total).ToString("N0") đ</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="text-muted">Phí vận chuyển:</span>
+                            <span class="text-success fw-semibold">Miễn phí</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="h5 fw-bold text-uppercase">Tổng cộng:</span>
+                            <span class="h5 fw-bold text-danger">@Model.Sum(x => x.Total).ToString("N0") đ</span>
+                        </div>
+                        <button class="btn btn-danger w-100 py-3 rounded-pill fw-bold text-uppercase shadow" style="background: linear-gradient(135deg, #ff6b35 0%, #ff8c53 100%); border: none;">
+                            Tiến hành thanh toán <i class="bi bi-chevron-right ms-2"></i>
+                        </button>
+                        
+                        <div class="mt-4 text-center">
+                            <p class="small text-muted mb-0"><i class="bi bi-shield-lock-fill me-1"></i> Thanh toán an toàn & bảo mật</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5 bg-light rounded-4 border-2 border-dashed" style="border-color: #ff6b35 !important;">
+            <div class="mb-4">
+                <i class="bi bi-cart-x text-muted" style="font-size: 5rem;"></i>
+            </div>
+            <h3 class="fw-bold text-dark">Giỏ hàng của bạn đang trống</h3>
+            <p class="text-muted mb-4">Có vẻ như bạn chưa thêm đôi giày nào vào giỏ hàng.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn btn-danger px-5 py-3 rounded-pill fw-bold text-uppercase shadow-sm" style="background-color: #ff6b35; border-color: #ff6b35;">
+                Mua sắm ngay bây giờ
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .table thead th { border-bottom: none; }
+</style>
