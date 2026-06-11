@@ -46,6 +46,18 @@ builder.Services.AddHttpContextAccessor();
 // Thêm các dịch vụ hỗ trợ mô hình MVC (Controller & Views)
 builder.Services.AddControllersWithViews();
 
+// Cấu hình CORS: Cho phép Frontend từ VS Code (Live Server) truy cập API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowVSCode",
+        policy =>
+        {
+            policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Cấu hình mặc định cho tiền tệ và ngày tháng theo chuẩn Việt Nam
 var cultureInfo = new CultureInfo("vi-VN");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -79,6 +91,7 @@ app.UseStaticFiles(new StaticFileOptions
 // ----------------------------------
 
 app.UseRouting();
+app.UseCors("AllowVSCode"); // Bật CORS sau UseRouting và trước UseAuthentication
 app.UseSession();
 
 // BẮT BUỘC: Phải kích hoạt Authentication (Xác thực danh tính) TRƯỚC Authorization (Cấp quyền)
@@ -87,6 +100,9 @@ app.UseAuthorization();
 
 // THÊM DÒNG NÀY: Định tuyến để hệ thống tự động ánh xạ các trang Đăng ký/Đăng nhập của Identity UI
 app.MapRazorPages();
+
+// Đảm bảo các API Controller sử dụng Attribute Routing ([Route("api/...")) được kích hoạt
+app.MapControllers();
 
 // Cấu hình Route cho Areas (Admin) - PHẢI ĐẶT TRƯỚC DEFAULT
 app.MapControllerRoute(
